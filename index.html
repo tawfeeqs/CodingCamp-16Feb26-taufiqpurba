@@ -14,13 +14,56 @@
 </head>
 <body>
     <!-- header -->
-    <header>To-Do List</header>
+    <header>
+        <h1 class="text-3xl font-bold">To-Do List</h1>
+    </header>
 
     <!-- main -->
-    <main></main>
+    <main>
+        <!-- form section -->
+        <section>
+            <form>
+                <!-- todo input -->
+                <input class="border p-2 round" type="text" id="todo-input" placeholder="Masukkan to-do baru...">
+
+                <!-- date input -->
+                 <input class="border p-2 round" type="date" id="todo-date" placeholder="Masukkan tanggal">
+            </form>
+
+            <!-- add button -->
+             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" onclick="addTodo()">Add</button>
+        </section>
+
+        <!-- action section -->
+        <section class="flex pt-2 justify-between">
+            <!-- clear all button -->
+            <button class="border rounded p-2 bg-red-500 text-white">Clear All</button>
+
+            <!-- filter button -->
+            <button class="border rounded p-2 bg-blue-500 text-white">Filter</button>
+        </section>
+
+        <!-- todo list section -->
+        <section class="pt-2">
+            <header>
+                <h1 class="text-2xl font-semibold">List of To-Do</h1>
+            </header>
+
+            <ul class="pt-2" id="todo-list">
+                <!-- todo items will be dynamically added here -->
+                 <li>No To-Dos available</li>
+            </ul>
+        </section>
+
+    </main>
 
     <!-- footer -->
-    <footer></footer>
+    <footer>
+        <p class="text-center text-gray-500 text-sm mt-4">© 2026 To-Do List App. All rights reserved.</p>
+    </footer>
+
+    <!-- javascript external -->
+    <script src="js/script.js"></script>
 
 </body>
 </html>
