@@ -3,3 +3,10 @@ body {
     height: 100vh;
     align-content: center;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
