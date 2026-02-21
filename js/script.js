@@ -1,30 +1,102 @@
-// temporary data storage for todo items
+// get elements from HTML
+const todoInput = document.getElementById('todo-input');
+const todoDate = document.getElementById('todo-date');
+const addBtn = document.getElementById('add-btn');
+const todoList = document.getElementById('todo-list');
+const clearBtn = document.getElementById('clear-btn');
+const filterBtn = document.getElementById('filter-btn');
+const filterDropdown = document.getElementById('filter-dropdown');
+
+// store todo's array
 let todos = [];
+
+// add button's event listener
+addBtn.addEventListener('click', addTodo);
+
+// filter button's event listener
+filterBtn.addEventListener('click', function() {
+    filterDropdown.classList.toggle('hidden');
+});
+
+// filter options event listeners
+filterDropdown.addEventListener('click', function (e) {
+    const type = e.target.dataset.filter;
+
+    if (type) {
+        filterTodos(type);
+        filterDropdown.classList.add('hidden');
+    }
+});
 
 // function to add a new todo item
 function addTodo() {
-    const todoInput = document.getElementById('todo-input');
-    const todoDate = document.getElementById('todo-date');
+    const text = todoInput.value.trim();
+    const date = todoDate.value;
 
-    // basic validation to ensure both fields are filled
-    console.log(todoInput.value);
-    console.log(todoDate.value);
-    if (todoInput.value.trim() === '' || todoDate.value.trim() === '') {
-        alert('Please enter a to-do item and select a due date.');
-    } else {
-        // create a new todo object and add it to the todo array
-        const newTodo = {
-            text: todoInput.value,
-            date: todoDate.value
-        };
-
-        // add the new todo to the array
-        todos.push(newTodo);
+    // basic validation
+    if (text === '' || date === '') {
+        alert("Please enter a to-do and select a date");
+        return;
     }
+
+    // create a new todo object
+    const newTodo = {
+        id: Date.now(),
+        text: text,
+        date: date
+    };
+
+    // add the new todo
+    todos.push(newTodo);
+
+    // re-render list
+    renderTodos(todos);
+
+    // reset input
+    todoInput.value = '';
+    todoDate.value = '';
 }
 
-function displayTodos() {}
+// function to display todo
+function renderTodos(todoArray) {
+    todoList.innerHTML = '';
 
-function deleteTodos() {}
+    todoArray.forEach(todo => {
+        const li = document.createElement('li');
 
-function filterTodos() {}
+        li.innerHTML = `
+            <span>${todo.text} - ${todo.date}</span>
+            <button data-id="${todo.id}">Hapus</button>
+        `;
+
+        // delete event
+        li.querySelector('button').addEventListener('click', function() {
+            deleteTodo(todo.id);
+        });
+
+        todoList.appendChild(li);
+    });
+}
+
+// function to delete todo
+clearBtn.addEventListener('click', function() {
+    if (confirm("Are you sure you want to clear all to-dos?")) {
+        todos = [];
+        renderTodos(todos);
+    }
+});
+
+// function to filter
+function filterTodos(type) {
+    const today = new Date().toISOString().split('T')[0];
+
+    if (type === 'all') {
+        renderTodos(todos);
+    } else if (type === 'today') {
+        const filtered = todos.filter(todo => todo.date === today);
+        renderTodos(filtered);
+    } else if (type === 'upcoming') {
+        const filtered = todos.filter(todo => todo.date > today);
+        renderTodos(filtered);
+    }
+}

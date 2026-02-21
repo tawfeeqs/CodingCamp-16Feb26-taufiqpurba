@@ -24,23 +24,47 @@
         <section>
             <form>
                 <!-- todo input -->
-                <input class="border p-2 round" type="text" id="todo-input" placeholder="Masukkan to-do baru...">
+                <input class="border p-2 rounded" type="text" id="todo-input" placeholder="Input new to-do">
 
                 <!-- date input -->
-                 <input class="border p-2 round" type="date" id="todo-date" placeholder="Masukkan tanggal">
+                 <input class="border p-2 rounded" type="date" id="todo-date">
             </form>
 
             <!-- add button -->
-             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" onclick="addTodo()">Add</button>
+             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" id="add-btn">Add</button>
         </section>
 
         <!-- action section -->
         <section class="flex pt-2 justify-between">
             <!-- clear all button -->
-            <button class="border rounded p-2 bg-red-500 text-white">Clear All</button>
+            <button class="border rounded p-2 bg-red-500 text-white" id="clear-btn">Clear All</button>
 
             <!-- filter button -->
-            <button class="border rounded p-2 bg-blue-500 text-white">Filter</button>
+            <div class="relative inline-block">
+                <button id="filter-btn"
+                    class="border rounded p-2 bg-blue-500 text-white">
+                    Filter
+                </button>
+
+                <div id="filter-dropdown"
+                    class="hidden absolute right-0 mt-2 w-40 bg-white border rounded shadow">
+
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        data-filter="all">
+                        All
+                    </button>
+
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        data-filter="today">
+                        Today
+                    </button>
+
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                        data-filter="upcoming">
+                        Upcoming
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- todo list section -->
@@ -59,7 +83,7 @@
 
     <!-- footer -->
     <footer>
-        <p class="text-center text-gray-500 text-sm mt-4">© 2026 To-Do List App. All rights reserved.</p>
+        <p class="text-center text-gray-500 text-sm mt-4">Made by Tawfeeqs. 2026</p>
     </footer>
 
     <!-- javascript external -->
