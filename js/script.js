@@ -13,21 +13,6 @@ let todos = [];
 // add button's event listener
 addBtn.addEventListener('click', addTodo);
 
-// filter button's event listener
-filterBtn.addEventListener('click', function() {
-    filterDropdown.classList.toggle('hidden');
-});
-
-// filter options event listeners
-filterDropdown.addEventListener('click', function (e) {
-    const type = e.target.dataset.filter;
-
-    if (type) {
-        filterTodos(type);
-        filterDropdown.classList.add('hidden');
-    }
-});
-
 // function to add a new todo item
 function addTodo() {
     const text = todoInput.value.trim();
@@ -66,7 +51,7 @@ function renderTodos(todoArray) {
 
         li.innerHTML = `
             <span>${todo.text} - ${todo.date}</span>
-            <button data-id="${todo.id}">Hapus</button>
+            <button data-id="${todo.id}">Delete</button>
         `;
 
         // delete event
@@ -78,11 +63,33 @@ function renderTodos(todoArray) {
     });
 }
 
-// function to delete todo
+// function to delete a todo item
+function deleteTodo(id) {
+    todos = todos.filter(todo => todo.id !== id);
+    renderTodos(todos);
+}
+
+
+// function to clear all todo items
 clearBtn.addEventListener('click', function() {
     if (confirm("Are you sure you want to clear all to-dos?")) {
         todos = [];
         renderTodos(todos);
+    }
+});
+
+// filter button's event listener
+filterBtn.addEventListener('click', function() {
+    filterDropdown.classList.toggle('hidden');
+});
+
+// filter options event listeners
+filterDropdown.addEventListener('click', function (e) {
+    const type = e.target.dataset.filter;
+
+    if (type) {
+        filterTodos(type);
+        filterDropdown.classList.add('hidden');
     }
 });
 
